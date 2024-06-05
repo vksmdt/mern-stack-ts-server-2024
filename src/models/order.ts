@@ -1,5 +1,18 @@
 import mongoose from "mongoose";
+import { orderItemType, shippingInfoType } from "../types/types.js";
 
+interface IOrder extends Document {
+  shippingInfo: shippingInfoType;
+  user: string;
+  subtotal: number;
+  tax: number;
+  shippingCharges: number;
+  discount: number;
+  total: number;
+  status: string;
+  orderItems: orderItemType[];
+  createdAt: Date;
+}
 const schema = new mongoose.Schema(
   {
     shippingInfo: {
@@ -73,4 +86,4 @@ const schema = new mongoose.Schema(
   }
 );
 
-export const Order = mongoose.model("Order", schema);
+export const Order = mongoose.model<IOrder>("Order", schema);
